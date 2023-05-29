@@ -57,3 +57,66 @@ class jobscheduling {
         System.out.println("\nTotal Profit: " + totalProfit);
     }
 }
+
+******************************************* fcfs **********************
+import java.util.*;
+class fcfs{
+	public static void main(String args[])
+	{
+		int i,j,avWT=0,avTAT=0;
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter total number of process =");
+		int n=sc.nextInt();
+		int AT[]=new int[10];
+		int BT[]=new int[10];
+		int CT[]=new int[10];
+		int WT[]=new int[10];
+		int TAT[]=new int[10];
+
+		System.out.println("Enter arrival time=");
+		for(i=0;i<n;i++)
+		{
+			AT[i]=sc.nextInt();
+		}
+
+		
+		System.out.println("\n Enter burst time=");
+		for(i=0;i<n;i++)
+		{
+			BT[i]=sc.nextInt();
+		}
+
+		CT[0]=BT[0];
+		for(j=1;j<=n;j++)
+		{
+			CT[j]=CT[j-1]+BT[j];
+		}
+		WT[0]=0;
+		//calculating waiting time
+		int e;
+		for(i=1;i<=n;i++)
+		{
+			e=CT[i-1]-AT[i];
+			WT[i]=e;
+		}
+
+
+		System.out.println("\n Process \t ArivalTime \t BrustTime \t WaitingTime \t Complitiontime \t Turnaroundtime");
+		//calculating turn around time
+
+		for(i=0;i<n;i++)
+		{
+			TAT[i]=BT[i]+WT[i];
+			avWT+=WT[i];
+			avTAT+=TAT[i];
+		System.out.println("\n P["+i+"]"+" \t\t "+AT[i]+" \t\t "+BT[i]+" \t\t "+WT[i]+" \t\t "+CT[i]+" \t\t\t "+TAT[i]);
+		}
+		avWT=avWT/n;
+		avTAT=avTAT/n;
+		System.out.println("\nAverage waitng time="+avWT);
+		System.out.println("\nAverage turnaroundtime="+avTAT);
+
+
+
+	}
+}
